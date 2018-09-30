@@ -20,48 +20,46 @@ import com.google.common.base.Preconditions;
 @Configuration
 @ConditionalOnClass(DataSource.class)
 public class SQLAutoconfiguration {
-	
+
 	@Autowired
-    private Environment env;
-    
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-       LocalContainerEntityManagerFactoryBean em 
-         = new LocalContainerEntityManagerFactoryBean();
-       em.setDataSource(dataSource());
-       em.setPackagesToScan(new String[] { "com.hhub.models" });
-  
-       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-       em.setJpaVendorAdapter(vendorAdapter);
-       em.setJpaProperties(hibernateProperties());
-  
-       return em;
-    }
+	private Environment env;
 
-    @Bean
-    public DataSource dataSource() {
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "com.hhub.models" });
 
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(hibernateProperties());
 
-        dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("db.driver")));
-        dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("db.url")));
-        dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("db.username")));
-        dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("db.password")));
+		return em;
+	}
 
-        return dataSource;
-    }
-    
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+	@Bean
+	public DataSource dataSource() {
 
+		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-    private final Properties hibernateProperties() {
-        final Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		dataSource.setDriverClassName(Preconditions.checkNotNull(env.getProperty("db.driver")));
+		dataSource.setUrl(Preconditions.checkNotNull(env.getProperty("db.url")));
+		dataSource.setUsername(Preconditions.checkNotNull(env.getProperty("db.username")));
+		dataSource.setPassword(Preconditions.checkNotNull(env.getProperty("db.password")));
 
-        return hibernateProperties;
-    }
+		return dataSource;
+	}
+
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	private final Properties hibernateProperties() {
+		final Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+
+		return hibernateProperties;
+	}
 
 }

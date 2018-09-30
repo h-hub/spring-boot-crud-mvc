@@ -1,4 +1,4 @@
-package com.hhub.crudApp;
+package com.hhub;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
