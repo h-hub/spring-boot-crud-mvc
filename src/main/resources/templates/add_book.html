@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert Book</title>
+</head>
+<body>
+	<form action="#" th:action="@{/addbook}" th:object="${book}" method="post">
+    	<p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Author: <input type="text" th:field="*{author}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>
