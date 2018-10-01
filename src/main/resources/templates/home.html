@@ -1,5 +1,9 @@
 <html>
-<head><title>Home Page</title></head>
+<head>
+<title>Home Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"/>
+
+</head>
 <body>
 	<h1>Hello !</h1>
 	<p>Welcome to <span th:text="${appName}">Our App</span></p>
