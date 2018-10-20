@@ -6,39 +6,53 @@
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
+	
 	<div class="container">
-		<div class="row">
-			<h1>User Registration</h1>
-			<form action="#" th:action="@{/registerUser}" th:object="${userDto}" method="POST" enctype="utf8">
-				<div class="form-group">
-					<label for="fname">First Name</label> 
-					<input type="text" class="form-control" id="fname" placeholder="First Name" th:field="*{firstName}" >
-					<small th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Validation error</small>
-				</div>
-				<div class="form-group">
-					<label for="lname">Last Name</label> 
-					<input type="text" class="form-control" id="lname" placeholder="Last Name" th:field="*{lastName}" >
-					<small th:each="error : ${#fields.errors('lastName')}" th:text="${error}">Validation error</small>
-				</div>
-				<div class="form-group">
-					<label for="email">Email address</label> 
-					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}" > 
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-					<small th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation error</small>
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label> 
-					<input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
-					<small th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</small>
-				</div>
-				<div class="form-group">
-					<label for="repeatePassword">Repeat Password</label> 
-					<input type="password" class="form-control" id="repeatePassword" placeholder="Password" th:field="*{matchingPassword}">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-			
-		</div>
-	</div>
+      <div class="py-5 text-center">
+        <h2>User Registration</h2>
+        <p class="lead">Input the correct information and submit.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">User information</h4>
+          <form class="needs-validation" novalidate action="#" th:action="@{/registerUser}" th:object="${userDto}" method="POST" enctype="utf8">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" th:field="*{firstName}" required>
+                <small th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Valid first name is required.</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value=""  th:field="*{lastName}"  required>
+                <small th:each="error : ${#fields.errors('lastName')}" th:text="${error}">Valid last name is required.</small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email </label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" th:field="*{email}" >
+              <small th:each="error : ${#fields.errors('email')}" th:text="${error}">Please enter a valid email.</small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="password">Password </label>
+              <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}" >
+              <small th:each="error : ${#fields.errors('password')}" th:text="${error}">Validation error</small>
+            </div>
+            
+            <div class="mb-3">
+              <label for="repeatePassword">Repeat Password </label>
+              <input type="password" class="form-control" id="repeatePassword" placeholder="Password" th:field="*{matchingPassword}" >
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+      <div th:replace="fragments/footer :: footer"></div>
+    </div>
 </body>
 </html>
